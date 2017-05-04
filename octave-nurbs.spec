@@ -1,41 +1,40 @@
-%define	pkgname nurbs
+%define octpkg nurbs
 
-Summary:	NURBS routines for Octave
-Name:       octave-%{pkgname}
-Version:	1.3.4
-Release:        6
-Source0:	%{pkgname}-%{version}.tar.gz
-License:	GPLv2+
+# Exclude .oct files from provides
+%define __provides_exclude_from ^%{octpkglibdir}/.*.oct$
+
+Summary:	Routines for the creation, and manipulation of NURBS with Octave
+Name:		octave-%{octpkg}
+Version:	1.3.13
+Release:	1
+Source0:	http://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+License:	GPLv3+
 Group:		Sciences/Mathematics
-Url:		http://octave.sourceforge.net/nurbs/
-BuildRequires:  octave-devel >= 3.2.0
-BuildRequires:  pkgconfig(gl)
-BuildRequires:  pkgconfig(glu)
-BuildRequires:	libgomp-devel
-Requires:       octave(api) = %{octave_api}
+Url:		https://octave.sourceforge.io/%{octpkg}/
+
+BuildRequires:	octave-devel >= 3.8
+#BuildRequires:	gomp-devel
+
+Requires:	octave(api) = %{octave_api}
+
 Requires(post): octave
 Requires(postun): octave
 
 %description
-Collection of Octave routines for the creation, and manipulation of
-Non-Uniform Rational B-Splines (NURBS).
+Collection of routines for the creation, and manipulation of Non-Uniform
+Rational B-Splines (NURBS) with Octave, based on the NURBS toolbox by Mark
+Spink.
+
+This package is part of external Octave-Forge collection.
 
 %prep
-%setup -q -c %{pkgname}-%{version}
-cp %{SOURCE0} .
+%setup -qcT
+
+%build
+%octave_pkg_build -T
 
 %install
-%__install -m 755 -d %{buildroot}%{_datadir}/octave/packages/
-%__install -m 755 -d %{buildroot}%{_libdir}/octave/packages/
-export OCT_PREFIX=%{buildroot}%{_datadir}/octave/packages
-export OCT_ARCH_PREFIX=%{buildroot}%{_libdir}/octave/packages
-octave -q --eval "pkg prefix $OCT_PREFIX $OCT_ARCH_PREFIX; pkg install -verbose -nodeps -local %{pkgname}-%{version}.tar.gz"
-
-tar zxf %{SOURCE0} 
-mv %{pkgname}-%{version}/COPYING .
-mv %{pkgname}-%{version}/DESCRIPTION .
-
-%clean
+%octave_pkg_install
 
 %post
 %octave_cmd pkg rebuild
@@ -47,6 +46,10 @@ mv %{pkgname}-%{version}/DESCRIPTION .
 %octave_cmd pkg rebuild
 
 %files
-%doc COPYING DESCRIPTION
-%{_datadir}/octave/packages/%{pkgname}-%{version}
-%{_libdir}/octave/packages/%{pkgname}-%{version}
+%dir %{octpkglibdir}
+%{octpkglibdir}/*
+%dir %{octpkgdir}
+%{octpkgdir}/*
+%doc %{octpkg}-%{version}/NEWS
+%doc %{octpkg}-%{version}/COPYING
+
