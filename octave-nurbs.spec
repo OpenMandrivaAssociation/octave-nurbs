@@ -30,7 +30,6 @@ This package is part of external Octave-Forge collection.
 %{octpkglibdir}/*
 %dir %{octpkgdir}
 %{octpkgdir}/*
-#{_metainfodir}/*.metainfo.xml
 
 #---------------------------------------------------------------------------
 
