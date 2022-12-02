@@ -4,10 +4,10 @@ Summary:	Routines for the creation, and manipulation of NURBS with Octave
 Name:		octave-%{octpkg}
 Version:	1.4.3
 Release:	1
-Source0:	http://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Source0:	https://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
 License:	GPLv3+
 Group:		Sciences/Mathematics
-Url:		https://octave.sourceforge.io/%{octpkg}/
+Url:		https://packages.octave.org/%{octpkg}/
 
 BuildRequires:	octave-devel >= 5.1
 
@@ -20,8 +20,6 @@ Requires(postun): octave
 Collection of routines for the creation, and manipulation of Non-Uniform
 Rational B-Splines (NURBS) with Octave, based on the NURBS toolbox by Mark
 Spink.
-
-This package is part of external Octave-Forge collection.
 
 %files
 %license COPYING
