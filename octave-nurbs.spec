@@ -1,15 +1,15 @@
-%define octpkg nurbs
+%global octpkg nurbs
 
 Summary:	Routines for the creation, and manipulation of NURBS with Octave
-Name:		octave-%{octpkg}
+Name:		octave-nurbs
 Version:	1.4.3
-Release:	1
-Source0:	https://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Release:	2
 License:	GPLv3+
 Group:		Sciences/Mathematics
-Url:		https://packages.octave.org/%{octpkg}/
+Url:		https://packages.octave.org/nurbs/
+Source0:	https://downloads.sourceforge.net/octave/nurbs-%{version}.tar.gz
 
-BuildRequires:	octave-devel >= 5.1
+BuildRequires:  octave-devel >= 5.1.0
 
 Requires:	octave(api) = %{octave_api}
 
@@ -17,25 +17,22 @@ Requires(post): octave
 Requires(postun): octave
 
 %description
-Collection of routines for the creation, and manipulation of Non-Uniform
-Rational B-Splines (NURBS) with Octave, based on the NURBS toolbox by Mark
-Spink.
+Collection of routines for the creation, and manipulation of
+Non-Uniform Rational B-Splines (NURBS), based on the NURBS toolbox.
 
 %files
 %license COPYING
 %doc NEWS
-%dir %{octpkglibdir}
-%{octpkglibdir}/*
 %dir %{octpkgdir}
 %{octpkgdir}/*
+%dir %{octpkglibdir}
+%{octpkglibdir}/*
+#{_metainfodir}/*.metainfo.xml
 
 #---------------------------------------------------------------------------
 
 %prep
 %autosetup -p1 -n %{octpkg}-%{version}
-
-# remove backup files
-#find . -name \*~ -delete
 
 %build
 %set_build_flags
