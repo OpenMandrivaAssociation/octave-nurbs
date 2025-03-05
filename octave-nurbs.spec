@@ -2,8 +2,8 @@
 
 Summary:	Routines for the creation, and manipulation of NURBS with Octave
 Name:		octave-nurbs
-Version:	1.4.3
-Release:	2
+Version:	1.4.4
+Release:	1
 License:	GPLv3+
 Group:		Sciences/Mathematics
 Url:		https://packages.octave.org/nurbs/
